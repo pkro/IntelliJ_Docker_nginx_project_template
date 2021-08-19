@@ -1,6 +1,29 @@
 PHPDocker.io generated environment
 ==================================
 
+nginx, php7.4, XDebug3, IntelliJ/PHPStorm
+
+
+PKR: IMPORTANT:
+
+Main changes to get Xdebug+IntelliJ working on my system:
+
+    Bash:
+    sudo iptables -A INPUT -p tcp -d 0/0 -s 0/0 --dport 9003 -j ACCEPT
+
+    OR
+
+    sudo ufw allow 9003
+
+    php-ini-overrides.ini (in addition to the recommendations below):
+    xdebug.discover_client_host = On
+
+    phpdocker/nginx/nginx.conf (AFTER include fastcgi_params;)
+    fastcgi_param SERVER_NAME Docker; 
+
+
+
+
 # Add to your project #
 
 Simply, unzip the file into your project, this will create `docker-compose.yml` on the root of your project and a folder named `phpdocker` containing nginx and php-fpm config for it.
